@@ -1,0 +1,328 @@
+create database coursWork default character set utf8 collate utf8_general_ci;
+use coursWork;
+create table groups(
+	id int auto_increment,
+	number varchar(6) not null,
+	primary key(id)
+);
+
+create table students(
+	id int auto_increment,
+	name varchar(32) not null,
+	surname varchar(32) not null,
+	group_id int not null,
+	primary key(id),
+	foreign key (group_id) references groups(id)
+);
+
+create table passwords(
+	pass varchar(8),
+	stud_id int not null,
+	unique(pass),
+	foreign key (stud_id) references students(id)
+);
+
+create table subjects(
+	id int auto_increment,
+	name varchar(256) not null,
+	primary key(id)
+);
+
+create table subject_group(
+	id int auto_increment,
+	subject_id int not null,
+	group_id int not null,
+	primary key(id),
+	foreign key (subject_id) references subjects(id),
+	foreign key (group_id) references groups(id)
+	
+);
+
+create table themes(
+	id int auto_increment,
+	title varchar(1024) not null,
+	subject_id int not null,
+	primary key(id),
+	foreign key (subject_id) references subjects(id)
+
+);
+
+create table works(
+	id int auto_increment,
+	stud_id int not null,
+	accept_date timestamp default CURRENT_TIMESTAMP() not null,
+	theme_id int not null,
+	group_id int not null,
+	subject_id int not null,
+	primary key(id),
+	unique(theme_id, group_id),
+	unique(subject_id, stud_id),
+	foreign key (theme_id) references themes(id),
+	foreign key (stud_id) references students(id),
+	foreign key (subject_id) references subjects(id),
+	foreign key (group_id) references groups(id)
+
+	
+);
+
+insert into groups(number) value ('710-15'), ('715-15'), ('223-15'), ('224-15'), ('226-15');
+insert into subjects(name) value ('DBMS');
+insert into subject_group(subject_id, group_id) value (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
+
+insert into themes(title, subject_id) values ('Разработка базы данных системы распределенных вычислений', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных мировой сети магазинов', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных сайта коллективного перевода книг', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных системы управления инцидентами', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных электронной энциклопедии', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных браузера', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных сервиса электронной почты', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных репозитория программ операционной системы', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных системы управления проектом', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных площадки для фриланса', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных мессенджера', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных онлайн файлового хранилища', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных площадки для интернет торговли', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для онлайн приемной руководителя', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы консолидации заказов из-за границы', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных системы мобильного банкинга', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных системы банкоматов, оказывающих услуги населению', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных электронной кассы коммунальных платежей', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных единой системы учёта граждан РУз', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных службы доставки электронной торговой площадки', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных ГТЦ', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных системы анонимного опроса качества ВУЗов Узбекистана', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных форума с вложенными комментариями', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы оплаты товаров через использования QR-кодов и мобильных телефонов.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы управления городским пассажирским транспортом. ', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для Деканата ВУЗа.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы краудфандинга проектов.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для умного дома.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы безопасности и видеонаблюдения на парковке.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы голосования на выборах в Олий Мажлис', 1);
+insert into themes(title, subject_id) values ('Разработка единой электронной базы данных истории болезней граждан Республики Узбекистан.', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных записей актов гражданского состояния (ЗАГС)', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы выдачи патентов и авторских свидетельств', 1);
+insert into themes(title, subject_id) values ('Разработки базы данных для профессиональной социальной сети (такой как LinkedIn)', 1);
+insert into themes(title, subject_id) values ('Разработка базы данных для системы электронного документооборота.', 1);
+
+
+insert into students(surname, name, group_id) values ('Ahmadjonov', 'Shaxboz', 2);
+insert into students(surname, name, group_id) values ('Anvarov', 'Samandar', 2);
+insert into students(surname, name, group_id) values ('Aripova', 'Zarina', 2);
+insert into students(surname, name, group_id) values ('Aslanov', 'Fazliddin', 2);
+insert into students(surname, name, group_id) values ('Boybayev', 'Sherzod', 2);
+insert into students(surname, name, group_id) values ('Dadaxonov', 'Davronbek', 2);
+insert into students(surname, name, group_id) values ('Fayziyev', 'Muhammadjon', 2);
+insert into students(surname, name, group_id) values ('Galiullin', 'Timur', 2);
+insert into students(surname, name, group_id) values ('Ganiyev', 'Begzod', 2);
+insert into students(surname, name, group_id) values ('Ilhomjonov', 'Jamshid', 2);
+insert into students(surname, name, group_id) values ('Kamiljanov', 'Doniyor', 2);
+insert into students(surname, name, group_id) values ('Kasimov', 'Saidaminxon', 2);
+insert into students(surname, name, group_id) values ('Kilichov', 'Olmasjon', 2);
+insert into students(surname, name, group_id) values ('Madjitov', 'Boburbek', 2);
+insert into students(surname, name, group_id) values ('Mahmudjonov', 'Javohir', 2);
+insert into students(surname, name, group_id) values ('Mamay', 'Nikita', 2);
+insert into students(surname, name, group_id) values ('Mirhamitov', 'Mirolim', 2);
+insert into students(surname, name, group_id) values ('Mirjalilova', 'Umida', 2);
+insert into students(surname, name, group_id) values ('Nabijonov', 'Anvarjon', 2);
+insert into students(surname, name, group_id) values ('Nosirov', 'Shermuhammad', 2);
+insert into students(surname, name, group_id) values ('Otajonov', 'Sarvarbek', 2);
+insert into students(surname, name, group_id) values ('Sattorova', 'Madina', 2);
+insert into students(surname, name, group_id) values ('Turgunov', 'Rustam', 2);
+insert into students(surname, name, group_id) values ('Tursunov', 'Ruziboy', 2);
+insert into students(surname, name, group_id) values ('Uktamov', 'Nurali', 2);
+insert into students(surname, name, group_id) values ('Valiyev', 'Sherzod', 2);
+insert into students(surname, name, group_id) values ('Xojaqulov', 'Sadiy', 2);
+insert into students(surname, name, group_id) values ('Pattaeva', 'Maftuna', 2);
+
+
+
+insert into passwords(stud_id, pass) values (26, 'QEIYU7C4');
+insert into passwords(stud_id, pass) values (7, 'WYB5HQLM');
+insert into passwords(stud_id, pass) values (3, 'NF76VQPM');
+insert into passwords(stud_id, pass) values (19, 'HMX5W6LX');
+insert into passwords(stud_id, pass) values (4, 'ZESM3QIM');
+insert into passwords(stud_id, pass) values (5, '3RC4PQNM');
+insert into passwords(stud_id, pass) values (10, 'R4CRA6WY');
+insert into passwords(stud_id, pass) values (6, 'ULRNRQOM');
+insert into passwords(stud_id, pass) values (27, 'SQZII7H4');
+insert into passwords(stud_id, pass) values (12, 'ALGOY6MY');
+insert into passwords(stud_id, pass) values (16, 'JZINK6IX');
+insert into passwords(stud_id, pass) values (25, 'XJ2HQ7B4');
+insert into passwords(stud_id, pass) values (28, '6PLWM7A4');
+insert into passwords(stud_id, pass) values (8, 'CWU3LQMM');
+insert into passwords(stud_id, pass) values (1, 'XEUKXPZI');
+insert into passwords(stud_id, pass) values (22, 'GSG2C7G4');
+insert into passwords(stud_id, pass) values (21, 'NXYI67F4');
+insert into passwords(stud_id, pass) values (15, '56VPE6PY');
+insert into passwords(stud_id, pass) values (14, '3SE7Q6KY');
+insert into passwords(stud_id, pass) values (24, 'U5JX47E4');
+insert into passwords(stud_id, pass) values (23, 'I6XJW7D4');
+insert into passwords(stud_id, pass) values (2, 'KZPPBQKM');
+insert into passwords(stud_id, pass) values (17, 'MFY466NX');
+insert into passwords(stud_id, pass) values (9, 'FDFK7QJM');
+insert into passwords(stud_id, pass) values (18, 'FAHOC6OY');
+insert into passwords(stud_id, pass) values (20, 'LLHZK7A4');
+insert into passwords(stud_id, pass) values (13, 'CXW6M6JY');
+insert into passwords(stud_id, pass) values (11, 'UITAU6TY');
+
+
+insert into students(surname, name, group_id) values ('Abdukarimov', 'Hurshid', 3);
+insert into students(surname, name, group_id) values ('Abdullayev', 'Sarvar', 3);
+insert into students(surname, name, group_id) values ('Abduraximov', 'Sanjar', 3);
+insert into students(surname, name, group_id) values ('Alixodjayev', 'Sherzod', 3);
+insert into students(surname, name, group_id) values ('Anvarov', 'Abdurahim', 3);
+insert into students(surname, name, group_id) values ('Atabayev', 'Sarvar', 3);
+insert into students(surname, name, group_id) values ('Juraboyeva', 'Gulnoz', 3);
+insert into students(surname, name, group_id) values ('Jurayev', 'Hasan', 3);
+insert into students(surname, name, group_id) values ('Mamatov', 'Husan', 3);
+insert into students(surname, name, group_id) values ('Masharipov', 'Sardor', 3);
+insert into students(surname, name, group_id) values ('Melikulov', 'Sardor', 3);
+insert into students(surname, name, group_id) values ('Nigmatov', 'Adham', 3);
+insert into students(surname, name, group_id) values ('Nigmatullayev', 'Sarvar', 3);
+insert into students(surname, name, group_id) values ('Kurbonov', 'Tohir', 3);
+insert into students(surname, name, group_id) values ('Rashidov', 'Dilshod', 3);
+insert into students(surname, name, group_id) values ('Sagdullayeva', 'Sabohat', 3);
+insert into students(surname, name, group_id) values ('Shodiev', 'Nodir', 3);
+insert into students(surname, name, group_id) values ('Tolipov', 'Shuxrat', 3);
+insert into students(surname, name, group_id) values ('Tilavova', 'Zubayda', 3);
+insert into students(surname, name, group_id) values ('Xoliqulov', 'Nemat', 3);
+insert into students(surname, name, group_id) values ('Yahshiboyev', 'Rustam', 3);
+insert into students(surname, name, group_id) values ('Yuldashev', 'Ibrohim', 3);
+insert into students(surname, name, group_id) values ('Zakirov', 'Ruslan', 3);
+
+insert into passwords(stud_id, pass) values (59, 'TQBYK37F');
+insert into passwords(stud_id, pass) values (62, '2ZTHG36F');
+insert into passwords(stud_id, pass) values (58, 'RHRIU32F');
+insert into passwords(stud_id, pass) values (77, 'RLVCM5FN');
+insert into passwords(stud_id, pass) values (60, '7SUGO3YF');
+insert into passwords(stud_id, pass) values (74, 'AQBVA5CO');
+insert into passwords(stud_id, pass) values (70, 'NZXUI36F');
+insert into passwords(stud_id, pass) values (63, '5GDW233F');
+insert into passwords(stud_id, pass) values (73, 'HZTD45BO');
+insert into passwords(stud_id, pass) values (65, 'LNHEU3ZF');
+insert into passwords(stud_id, pass) values (76, 'O7ESY5AN');
+insert into passwords(stud_id, pass) values (61, 'B7FGC35F');
+insert into passwords(stud_id, pass) values (68, 'SWYTQ3YF');
+insert into passwords(stud_id, pass) values (71, 'QGID433F');
+insert into passwords(stud_id, pass) values (64, 'JAWVA34F');
+insert into passwords(stud_id, pass) values (66, 'ELVVW32F');
+insert into passwords(stud_id, pass) values (75, 'C4SEU5HO');
+insert into passwords(stud_id, pass) values (55, 'TA4GURI3');
+insert into passwords(stud_id, pass) values (57, 'YJCXS3ZF');
+insert into passwords(stud_id, pass) values (69, 'VDJDE35F');
+insert into passwords(stud_id, pass) values (56, 'V4SH634F');
+insert into passwords(stud_id, pass) values (67, 'GUGFM37F');
+insert into passwords(stud_id, pass) values (72, 'FNCUI5EO');
+
+insert into students(surname, name, group_id) values ('Abdullayeva', 'Umida', 4);
+insert into students(surname, name, group_id) values ('Abdurahmonov', 'Alahon', 4);
+insert into students(surname, name, group_id) values ('Abdurasulov', 'Rustam', 4);
+insert into students(surname, name, group_id) values ('Adilov', 'Nursultan', 4);
+insert into students(surname, name, group_id) values ('Ahunov', 'Bobur', 4);
+insert into students(surname, name, group_id) values ('Boymurodov', 'Jasur', 4);
+insert into students(surname, name, group_id) values ('Hotamov', 'Toxir', 4);
+insert into students(surname, name, group_id) values ('Ikromov', 'Asliddin', 4);
+insert into students(surname, name, group_id) values ('Latipov', 'Boburmirzo', 4);
+insert into students(surname, name, group_id) values ('Muhammadjonov', 'Sardorbek ', 4);
+insert into students(surname, name, group_id) values ('Muhiddinova', 'Nafisaxon ', 4);
+insert into students(surname, name, group_id) values ('Mustafoyev', 'Shaxzod', 4);
+insert into students(surname, name, group_id) values ('Omonullayev', 'Xayrulloxon', 4);
+insert into students(surname, name, group_id) values ('Ozodbekov', 'Azizxon', 4);
+insert into students(surname, name, group_id) values ('Polatov', 'Mirsarvar', 4);
+insert into students(surname, name, group_id) values ('Polatova', 'Ezozxon', 4);
+insert into students(surname, name, group_id) values ('Rustamova', 'Mohinur ', 4);
+insert into students(surname, name, group_id) values ('Saidova', 'Orzuhon', 4);
+insert into students(surname, name, group_id) values ('Sharipov', 'Mirhalil', 4);
+insert into students(surname, name, group_id) values ('Shorustamov', 'Akmal', 4);
+insert into students(surname, name, group_id) values ('Shukurlayeva', 'Soxiba', 4);
+insert into students(surname, name, group_id) values ('Xojaeva', 'Asolat', 4);
+insert into students(surname, name, group_id) values ('Xudoyberdiyev', 'Farxod', 4);
+insert into students(surname, name, group_id) values ('Xvan', 'Anastasiya', 4);
+insert into students(surname, name, group_id) values ('Yuldoshbekov', 'Sherzod ', 4);
+insert into students(surname, name, group_id) values ('Zaydullin', 'Sergey', 4);
+
+insert into passwords(stud_id, pass) values (79, 'DG37XVYD');
+insert into passwords(stud_id, pass) values (81, 'FFNZJWGE');
+insert into passwords(stud_id, pass) values (78, 'A2LADWDD');
+insert into passwords(stud_id, pass) values (90, 'RAAHPWHD');
+insert into passwords(stud_id, pass) values (86, 'HR6I5WDE');
+insert into passwords(stud_id, pass) values (97, 'QCZZFQY6');
+insert into passwords(stud_id, pass) values (83, 'AIM2BWEE');
+insert into passwords(stud_id, pass) values (100, '6WACGR7Z');
+insert into passwords(stud_id, pass) values (94, '2SCF7WDD');
+insert into passwords(stud_id, pass) values (87, 'J6OYRWAE');
+insert into passwords(stud_id, pass) values (95, 'BXW3LQ27');
+insert into passwords(stud_id, pass) values (88, 'VZBGXWBD');
+insert into passwords(stud_id, pass) values (82, '5732LWHE');
+insert into passwords(stud_id, pass) values (84, 'MK7IFWFE');
+insert into passwords(stud_id, pass) values (80, 'CU5JVWBE');
+insert into passwords(stud_id, pass) values (85, 'OXPXZWCD');
+insert into passwords(stud_id, pass) values (92, '7PDFHWFD');
+insert into passwords(stud_id, pass) values (99, 'LJYZ5Q66');
+insert into passwords(stud_id, pass) values (89, 'YFRWLWGD');
+insert into passwords(stud_id, pass) values (96, 'NWJJRQ36');
+insert into passwords(stud_id, pass) values (98, 'I5IKJQZ7');
+insert into passwords(stud_id, pass) values (91, 'TMQXDWED');
+insert into passwords(stud_id, pass) values (102, 'ZY7C6R5Z');
+insert into passwords(stud_id, pass) values (103, '4FPSSR2Z');
+insert into passwords(stud_id, pass) values (93, 'B3UE3WCD');
+insert into passwords(stud_id, pass) values (101, 'BCRB2R4Z');
+
+insert into students(surname, name, group_id) values ('Abdullayev', 'D', 5);
+insert into students(surname, name, group_id) values ('Abdullayev', 'I', 5);
+insert into students(surname, name, group_id) values ('Abdurahimov', '', 5);
+insert into students(surname, name, group_id) values ('Abduraimov', '', 5);
+insert into students(surname, name, group_id) values ('Boltabaeva', '', 5);
+insert into students(surname, name, group_id) values ('Bobadjonov', '', 5);
+insert into students(surname, name, group_id) values ('Bohodirov', '', 5);
+insert into students(surname, name, group_id) values ('Erkabayeva', '', 5);
+insert into students(surname, name, group_id) values ('Gaybullayev', '', 5);
+insert into students(surname, name, group_id) values ('Gershengoren', '', 5);
+insert into students(surname, name, group_id) values ('Ikramov', '', 5);
+insert into students(surname, name, group_id) values ('Isamuhamedov', '', 5);
+insert into students(surname, name, group_id) values ('Israilova', '', 5);
+insert into students(surname, name, group_id) values ('Israilov', '', 5);
+insert into students(surname, name, group_id) values ('Madjidov', '', 5);
+insert into students(surname, name, group_id) values ('Mirsadikova', '', 5);
+insert into students(surname, name, group_id) values ('Muminova', '', 5);
+insert into students(surname, name, group_id) values ('Muzaffarov', '', 5);
+insert into students(surname, name, group_id) values ('Pattaeva', '', 5);
+insert into students(surname, name, group_id) values ('Radjabov', '', 5);
+insert into students(surname, name, group_id) values ('Rahmanov', '', 5);
+insert into students(surname, name, group_id) values ('Razikov', '', 5);
+insert into students(surname, name, group_id) values ('Shakirov', '', 5);
+insert into students(surname, name, group_id) values ('Tahirov', '', 5);
+insert into students(surname, name, group_id) values ('Erkinov', '', 5);
+insert into students(surname, name, group_id) values ('Pirmatov', '', 5);
+
+insert into passwords(stud_id, pass) values (42, '4HIAHZTU');
+insert into passwords(stud_id, pass) values (54, 'EZQJDUSR');
+insert into passwords(stud_id, pass) values (50, '3HN2RUWR');
+insert into passwords(stud_id, pass) values (30, 'TEQQNZ7V');
+insert into passwords(stud_id, pass) values (37, 'Z2XQTZWU');
+insert into passwords(stud_id, pass) values (52, 'JSRILUUR');
+insert into passwords(stud_id, pass) values (33, 'DYE53ZSV');
+insert into passwords(stud_id, pass) values (49, 'CM7ZPUVR');
+insert into passwords(stud_id, pass) values (51, '5X6KFUTR');
+insert into passwords(stud_id, pass) values (31, 'VRBABZ4V');
+insert into passwords(stud_id, pass) values (32, 'BPUOFZVV');
+insert into passwords(stud_id, pass) values (41, 'DI2PFZKT');
+insert into passwords(stud_id, pass) values (43, '6TY73ZIT');
+insert into passwords(stud_id, pass) values (36, 'XOHA7ZRU');
+insert into passwords(stud_id, pass) values (46, 'FZK6ZZPT');
+insert into passwords(stud_id, pass) values (29, '2KCPJZWV');
+insert into passwords(stud_id, pass) values (38, 'SVGBXZXU');
+insert into passwords(stud_id, pass) values (39, 'VBWRLZUU');
+insert into passwords(stud_id, pass) values (45, 'M64NVZOT');
+insert into passwords(stud_id, pass) values (53, 'L7BX7URR');
+insert into passwords(stud_id, pass) values (48, 'UAN4TZNT');
+insert into passwords(stud_id, pass) values (40, 'A4J7RZNT');
+insert into passwords(stud_id, pass) values (35, '7DDORZQV');
+insert into passwords(stud_id, pass) values (47, 'IF3ONZMT');
+insert into passwords(stud_id, pass) values (34, '4WS65ZTV');
+insert into passwords(stud_id, pass) values (44, 'KSL6BZJT');
+
+
+insert into students(surname, name, group_id) values ('Andreeva', 'Kseniya', 1);
+insert into passwords(stud_id, pass) values (104, 'YRERR2V4');
