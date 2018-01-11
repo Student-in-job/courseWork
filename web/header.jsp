@@ -72,6 +72,7 @@
                                     <li class="divider"></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/list_pass.jsp">Students' passwords</a></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/students.jsp">Students' themes</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/group_themes.jsp">Themes chosen by students</a></li>
                                 </ul>
                             </li>
                         </ul> 

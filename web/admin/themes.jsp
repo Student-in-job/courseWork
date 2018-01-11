@@ -4,14 +4,14 @@
     Author     : Vitaliy Pak
 --%>
 
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
 
 <sql:query var="subjects" dataSource="jdbc/DB">
-  select * from subjects
+    select * from subjects
 </sql:query>
 <%@include file="admin_header.jsp" %>
 <c:if test="${(not empty param.themes)&&(not empty param.subjectid)}">
