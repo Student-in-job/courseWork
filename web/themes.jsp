@@ -13,6 +13,8 @@
     <h1>List of available themes:</h1>
     <p>Only free themes are displayed on this page. But remember, while you choose, someone can take a topic from this list!</p>
 
+    <c:choose>
+        <c:when test="${themes.size()>0}">
     <form action="handler" method="post">
         <c:forEach items="${themes}" var="theme">
             <div class="radio">
@@ -24,6 +26,12 @@
         </c:forEach>
         <button type="submit" class="btn btn-primary">Take selected theme</button>
     </form>
-
+        </c:when>
+        <c:otherwise>
+            <p class="alert alert-warning">
+                No free themes for you.
+            </p>
+        </c:otherwise>
+    </c:choose>
 </div>
 <%@include file="/footer.jsp" %>
