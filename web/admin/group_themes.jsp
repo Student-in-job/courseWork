@@ -13,7 +13,7 @@
 <%@include file="admin_header.jsp" %>
 <!-- Main component for a primary marketing message or call to action -->
 <div class="panel-group" id="accordion">
-    <c:forEach var="group" items="${groups.rows}">
+<c:forEach var="group" items="${groups.rows}">    
     <div class="panel panel-default">
         <div class="panel-heading">
             <a data-toggle="collapse" data-parent="#accordion" href="#${group.id}">
@@ -26,19 +26,15 @@
                     select * from subjects where id in (select subject_id from subject_group where group_id = ${group.id})
                 </sql:query>
                 <c:forEach var="subject" items="${subjects.rows}">
-                    <h3>
-                        ${subject.name}
-                        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#${group.id}${subject.id}" aria-expanded="false" aria-controls="collapseExample">
-                            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#${group.id}${subject.id}" aria-expanded="false" aria-controls="collapseExample">
+                            ${subject.name}&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                         </button>
-                    </h3>
                     <div class="collapse" id="${group.id}${subject.id}">
                         <table class="table table-bordered">
-                            <caption>${subject.name}</caption>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
                                     <th>Theme</th>
+                                    <th>Name</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +43,7 @@
                                     from
                                         themes t left join
                                         (select s.*, w.theme_id from students s join works w on w.stud_id = s.id where w.subject_id = ${subject.id} and w.group_id = ${group.id}) sw
-                                        on t.id = sw.theme_id 
+                                        on t.id = sw.theme_id where t.subject_id = ${subject.id}
                                 </sql:query>
                                 <c:forEach var="theme" items="${themes.rows}">
                                     <tr>
@@ -58,10 +54,11 @@
                             </tbody>
                         </table>
                     </div>
-                </c:forEach>
+                    <br/>
+                </c:forEach>    
             </div>
-        </div>  
+        </div>
     </div>
-    </c:forEach>
+</c:forEach>
 </div>
 <%@include file="/footer.jsp" %>

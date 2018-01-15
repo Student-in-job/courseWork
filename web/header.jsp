@@ -23,21 +23,9 @@
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
         <!-- Custom styles for this template -->
         <link href="${pageContext.request.contextPath}/css/navbar.css" rel="stylesheet">
 
-        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-        <script src="${pageContext.request.contextPath}/js/ie-emulation-modes-warning.js"></script>
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
     </head>
 
     <body>
@@ -45,7 +33,7 @@
         <div class="container">
 
             <!-- Static navbar -->
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -68,10 +56,11 @@
                                     <li><a href="${pageContext.request.contextPath}/admin/subjects.jsp">Subjects</a></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/themes.jsp">Themes</a></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/groups.jsp">Groups</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/students.jsp">Students</a></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/subject_group.jsp">Groups' subjects</a></li>
                                     <li class="divider"></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/list_pass.jsp">Students' passwords</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/admin/students.jsp">Students' themes</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/students_themes.jsp">Students' themes</a></li>
                                     <li><a href="${pageContext.request.contextPath}/admin/group_themes.jsp">Themes chosen by students</a></li>
                                 </ul>
                             </li>
@@ -110,4 +99,4 @@
             %>
             <div class="alert alert-<%=mod%>" role="alert"><%=mes%></div>
             <%}%>
-
+            <div style="min-height: 38px;display: block">

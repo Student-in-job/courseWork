@@ -26,7 +26,7 @@
     </c:forTokens>
     <div class="alert alert-success"><h4 class="text-center"><%=row_count%> Themes was successfully created!</h4></div>
 </c:if>
-<!-- Main component for a primary marketing message or call to action -->
+    
 <div class="jumbotron">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#themes" data-toggle="tab">Show theme</a></li>

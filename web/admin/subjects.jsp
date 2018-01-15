@@ -32,7 +32,7 @@
             <button type="submit" class="btn btn-default">Create</button>    
     </form>    
 </div>
-<div class="row marketing">
+<div>
     <sql:query var="subjects" dataSource="jdbc/DB">select * from subjects</sql:query>
     <table class="table table-striped table-responsive">
         <caption><h3 class="text-center">List of subjects</h3></caption>
