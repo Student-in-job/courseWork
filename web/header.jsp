@@ -67,7 +67,12 @@
                         </ul> 
                         <ul class="nav navbar-nav navbar-right">
                             <c:if test="${student!=null}">
-                                <li class="active"><a>${student.name} ${student.name2}</a></li>
+                                <li class="active">
+                                    <a>${student.name} ${student.name2}</a>
+                                </li>
+                                <li class="active">
+                                    <a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a> 
+                                </li>
                             </c:if>
                         </ul>
                     </div><!--/.nav-collapse -->
